@@ -46,7 +46,7 @@ function Check() {
     <Row>
       <Col>
         <h1 style={{ marginBottom: 0 }}>ตรวจสอบ Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
-        <div style={{ marginBottom: 32 }}>BETA: ทดสอบระบบ</div>
+        <div style={{ marginBottom: 32 }}>BETA: อยู่ในช่วงทดสอบระบบ</div>
         <hr />
         {displayMode === 'select' &&
           <>

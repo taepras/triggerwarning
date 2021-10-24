@@ -7,19 +7,20 @@ function Home() {
   return <Container>
     <Row>
       <Col>
-        <Well style={{textAlign: 'center', marginTop: 32, marginBottom: 32, paddingBottom: 32}}>
-          <h1 style={{marginBottom: 0}}>ติด Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
-          <div style={{ marginBottom: 32 }}>BETA: ทดสอบระบบ</div>
-        <Button as={Link} to="/generate">สร้างโค้ดตรวจสอบ Trigger Warning</Button>
+        <Well style={{ textAlign: 'center', marginTop: 32, marginBottom: 32, paddingBottom: 32 }}>
+          <h1 style={{ marginBottom: 0 }}>ติด Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
+          <div style={{ marginBottom: 32 }}>BETA: อยู่ในช่วงทดสอบระบบ</div>
+          <Button as={Link} to="/generate">สร้างโค้ดตรวจสอบ Trigger Warning</Button>
         </Well>
       </Col>
     </Row>
+    <Well>
     <Row>
       <Col><h2 style={{ textAlign: 'center' }}>ระบบนี้ทำงานยังไง?</h2></Col>
     </Row>
     <Row>
       <Col>
-        <h3>สำหรับผู้ผลิตสื่อ</h3>
+        <h3 style={{ textAlign: 'center' }}>สำหรับผู้ผลิตสื่อ</h3>
         <ol>
           <li>ผู้ผลิตสื่อระบุ Trigger Warning ในงานของตัวเองบนเว็บไซต์นี้</li>
           <li>ได้โค้ดสำหรับให้ผู้ชมตรวจสอบ Trigger Warning</li>
@@ -27,7 +28,7 @@ function Home() {
         </ol>
       </Col>
       <Col>
-        <h3>สำหรับผู้ชม/ผู้อ่าน</h3>
+        <h3 style={{ textAlign: 'center' }}>สำหรับผู้ชม/ผู้อ่าน</h3>
         <ol>
           <li>ผู้อ่าน/ผู้ชมสแกนโค้ดบนสื่อที่ต้องการอ่าน</li>
           <li>เลือกตรวจสอบเฉพาะ Trigger Warning ที่สนใจได้โดยไม่โดนสปอยล์ส่วนอื่นๆ</li>
@@ -35,6 +36,7 @@ function Home() {
         </ol>
       </Col>
     </Row>
+    </Well>
   </Container>
 }
 

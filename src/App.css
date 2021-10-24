@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;700&display=swap');
 
+body {
+  background-color: #f6f0f8;  
+}
+
 .App {
   margin: 0;
   font-family: 'IBM Plex Sans Thai', sans-serif;
+}
+
+hr {
+  border: 0.5px solid #8548be;
 }

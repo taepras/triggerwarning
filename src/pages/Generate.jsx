@@ -59,7 +59,7 @@ function Generate() {
     <Row>
       <Col>
         <h1 style={{ marginBottom: 0 }}>สร้างโค้ดตรวจสอบ Trigger Warning เพื่อผู้อ่านของคุณ</h1>
-        <div style={{ marginBottom: 32 }}>BETA: ทดสอบระบบ</div>
+        <div style={{ marginBottom: 32 }}>BETA: อยู่ในช่วงทดสอบระบบ</div>
         <hr />
         {displayMode === 'select' &&
           <>
