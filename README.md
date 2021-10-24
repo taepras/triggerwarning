@@ -1,3 +1,9 @@
+# triggerwarning
+
+Get the trigger warnings you need -- without unnecessary spoilers!
+
+-----
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
