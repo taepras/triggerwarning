@@ -6,6 +6,8 @@ const Button = styled.button`
   border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #6b507a;
   color: white;
+  text-decoration: none;
+  display: inline-block;
 `;
 
 export default Button;

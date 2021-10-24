@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import WarningList from '../data/WarningList';
 import { useEffect, useMemo, useState } from 'react';
