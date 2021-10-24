@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Row, Col } from 'react-grid-system';
 import WarningList from '../data/WarningList';
-import { useEffect, useState } from 'react';
 // import { useSearchParams } from 'react-router-dom'
 import Well from '../components/Well';
 import Button from '../components/Button';
@@ -39,18 +38,31 @@ function Generate() {
     setWarningChecked(newIsWarningChecked);
   }
 
-  const checkWarning = (i) => {
+  const generateCode = (i) => {
     setDisplayMode('result');
   }
+
+  const triggerCode = useMemo(() => {
+    let code = 0;
+    for (let i = WarningList.length - 1; i >= 0; i--) {
+      code += isWarningChecked[i];
+      code = code << 1;
+    }
+    return code >> 1;
+  }, [isWarningChecked]);
+
+  const codeUrl = useMemo(() => {
+    return `${document.location.origin}/check?id=${triggerCode}`;
+  }, [triggerCode]);
 
   return <Container style={{ paddingBottom: 64, paddingTop: 32 }}>
     <Row>
       <Col>
-        <h1>ตรวจสอบ Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
+        <h1>สร้างโค้ดตรวจสอบ Trigger Warning เพื่อผู้อ่านของคุณ</h1>
         <hr />
         {displayMode === 'select' &&
           <>
-            <h2>เลือก Trigger Warning ที่ต้องการตรวจสอบ</h2>
+            <h2>สื่อชิ้นนี้มีเนื้อหาดังต่อไปนี้</h2>
             <Well>
               {WarningList.map((x, i) => (
                 <div style={{ paddingBottom: 8, paddingTop: 8 }} key={`choice-${i}`}>
@@ -65,19 +77,7 @@ function Generate() {
                   </label>
                 </div>
               ))}
-              <Button onClick={checkWarning}>ตรวจสอบ</Button>
-            </Well>
-
-            <h2>หรือดู Trigger Warning ทั้งหมดของสื่อชิ้นนี้</h2>
-            <Well>
-              <Button onClick={() => setShowAll(!isShowAll)}>show/hide</Button>
-              {isShowAll &&
-                <ul>
-                  {applicableWarnings.map((x, i) => (
-                    <li key={`filtered-${i}`}>{x}</li>
-                  ))}
-                </ul>
-              }
+              <Button onClick={generateCode}>สร้างโค้ด</Button>
             </Well>
           </>
         }
@@ -85,17 +85,8 @@ function Generate() {
         {displayMode === 'result' &&
           <>
             <Well>
-              <h2>Checking Result</h2>
-              {WarningList.map((x, i) => (
-                <>{
-                  isWarningChecked[i]
-                  &&
-                  <li key={`all-${i}`}>
-                    <b>{isWarningChecked[i] && applicableWarnings.includes(x) ? 'YES' : 'NO'}</b>
-                    {' '}{x}
-                  </li>
-                }</>
-              ))}
+              <h2>โค้ดของคุณคือ</h2>
+            <a href={codeUrl} target="_blank">{codeUrl}</a>
             </Well>
             <Button onClick={() => setDisplayMode('select')}>ย้อนกลับ</Button>
           </>

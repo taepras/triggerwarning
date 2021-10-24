@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import WarningList from '../data/WarningList';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 // import { useSearchParams } from 'react-router-dom'
 import Well from '../components/Well';
 import Button from '../components/Button';
@@ -50,7 +50,7 @@ function Check() {
         <hr/>
         {displayMode === 'select' &&
           <>
-            <h2>เลือก Trigger Warning ที่ต้องการตรวจสอบ</h2>
+            <h2>เลือก Trigger Warning ที่ต้องการตรวจสอบในสื่อชิ้นนี้</h2>
             <Well>
                 {WarningList.map((x, i) => (
                   <div style={{paddingBottom: 8, paddingTop: 8}} key={`choice-${i}`}>
@@ -85,21 +85,31 @@ function Check() {
         {displayMode === 'result' &&
           <>
             <Well>
-              <h2>Checking Result</h2>
+              <h2>สื่อชิ้นนี้มีเนื้อหาเหล่านี้หรือไม่...</h2>
               {WarningList.map((x, i) => (
                 <>{
                   isWarningChecked[i]
                   &&
-                  <li key={`all-${i}`}>
-                    <b>{isWarningChecked[i] && applicableWarnings.includes(x) ? 'YES' : 'NO'}</b>
+                  <li
+                    key={`all-${i}`}
+                    style={{
+                      color: isWarningChecked[i] && applicableWarnings.includes(x) ? 'black' : '#aaa',
+                      marginBottom: 8
+                    }}
+                  >
+                    <b>{isWarningChecked[i] && applicableWarnings.includes(x) ? 'YES ⚠️' : 'NO'}</b>
                     {' '}{x}
                   </li>
                 }</>
               ))}
             </Well>
-          <Button onClick={() => setDisplayMode('select')}>ย้อนกลับ</Button>
+            <Button onClick={() => setDisplayMode('select')}>ย้อนกลับ</Button>
           </>
         }
+        <hr />
+        <p>
+          สร้างโค้ดสำหรับให้ผู้ชมตรวจสอบ Trigger Warning ในงานของคุณได้<a href="/generate" target="_blank">ที่นี่</a>
+        </p>
       </Col>
     </Row>
   </Container>
