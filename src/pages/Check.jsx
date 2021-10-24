@@ -2,15 +2,9 @@ import styled from 'styled-components';
 import { Container, Row, Col } from 'react-grid-system';
 import WarningList from '../data/WarningList';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom'
-
-
-const Well = styled.div`
-  background-color: #eee;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-`;
+// import { useSearchParams } from 'react-router-dom'
+import Well from '../components/Well';
+import Button from '../components/Button';
 
 function Check() {
   // const [searchParams, setSearchParams] = useSearchParams();
@@ -22,6 +16,8 @@ function Check() {
   let search = window.location.search;
   let searchParams = new URLSearchParams(search);
   const id = searchParams.get('id')
+
+  console.log(id)
 
   useEffect(() => {
     const newApplicableWarnings = [];
@@ -47,38 +43,38 @@ function Check() {
     setDisplayMode('result');
   }
 
-  return <Container>
+  return <Container style={{paddingBottom: 64, paddingTop: 32}}>
     <Row>
       <Col>
         <h1>ตรวจสอบ Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
+        <hr/>
         {displayMode === 'select' &&
           <>
             <h2>เลือก Trigger Warning ที่ต้องการตรวจสอบ</h2>
             <Well>
-              <ul>
                 {WarningList.map((x, i) => (
-                  <li>
-                    <label>
+                  <div style={{paddingBottom: 8, paddingTop: 8}} key={`choice-${i}`}>
+                    <label style={{display: 'flex'}}>
                       <input
                         name="warnings"
                         type="checkbox"
                         checked={isWarningChecked[i]}
+                        style={{ display: 'inline-block', marginRight: 8 }}
                         onChange={() => { toggleWarning(i) }} />
-                      {x}
+                      <span style={{ flexGrow: 1 }}>{x}</span>
                     </label>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-              <button onClick={checkWarning}>ตรวจสอบ</button>
+            <Button onClick={checkWarning}>ตรวจสอบ</Button>
             </Well>
 
-            <h2>Trigger Warning ทั้งหมดของสื่อชิ้นนี้</h2>
+            <h2>หรือดู Trigger Warning ทั้งหมดของสื่อชิ้นนี้</h2>
             <Well>
-              <button onClick={() => setShowAll(!isShowAll)}>show/hide</button>
+            <Button onClick={() => setShowAll(!isShowAll)}>show/hide</Button>
               {isShowAll &&
                 <ul>
-                  {applicableWarnings.map(x => (
-                    <li>{x}</li>
+                  {applicableWarnings.map((x, i) => (
+                    <li key={`filtered-${i}`}>{x}</li>
                   ))}
                 </ul>
               }
@@ -94,14 +90,14 @@ function Check() {
                 <>{
                   isWarningChecked[i]
                   &&
-                  <li>
+                  <li key={`all-${i}`}>
                     <b>{isWarningChecked[i] && applicableWarnings.includes(x) ? 'YES' : 'NO'}</b>
                     {' '}{x}
                   </li>
                 }</>
               ))}
             </Well>
-            <button onClick={() => setDisplayMode('select')}>ย้อนกลับ</button>
+          <Button onClick={() => setDisplayMode('select')}>ย้อนกลับ</Button>
           </>
         }
       </Col>
