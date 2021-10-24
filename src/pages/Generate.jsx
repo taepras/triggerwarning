@@ -52,43 +52,47 @@ function Generate() {
   }, [isWarningChecked]);
 
   const codeUrl = useMemo(() => {
-    return `${document.location.origin}/check?id=${triggerCode}`;
+    return `${document.location.origin}/check/v1?id=${triggerCode}`;
   }, [triggerCode]);
 
   return <Container style={{ paddingBottom: 64, paddingTop: 32 }}>
     <Row>
       <Col>
-        <h1>สร้างโค้ดตรวจสอบ Trigger Warning เพื่อผู้อ่านของคุณ</h1>
+        <h1 style={{ marginBottom: 0 }}>สร้างโค้ดตรวจสอบ Trigger Warning เพื่อผู้อ่านของคุณ</h1>
+        <div style={{ marginBottom: 32 }}>BETA: ทดสอบระบบ</div>
         <hr />
         {displayMode === 'select' &&
           <>
-            <h2>สื่อชิ้นนี้มีเนื้อหาดังต่อไปนี้</h2>
-            <Well>
-              {WarningList.map((x, i) => (
-                <div style={{ paddingBottom: 8, paddingTop: 8 }} key={`choice-${i}`}>
-                  <label style={{ display: 'flex' }}>
-                    <input
-                      name="warnings"
-                      type="checkbox"
-                      checked={isWarningChecked[i]}
-                      style={{ display: 'inline-block', marginRight: 8 }}
-                      onChange={() => { toggleWarning(i) }} />
-                    <span style={{ flexGrow: 1 }}>{x}</span>
-                  </label>
-                </div>
-              ))}
-              <Button onClick={generateCode}>สร้างโค้ด</Button>
-            </Well>
+            <h2 style={{marginBottom: 0}}>สื่อชิ้นนี้มีเนื้อหาดังต่อไปนี้</h2>
+            <p>ถ้าไม่มีเนื้อหาเหล่านี้ กด "สร้างโค้ด" ได้เลย</p>
+            {/* <Well> */}
+            {WarningList.map((x, i) => (
+              <div style={{ paddingBottom: 8, paddingTop: 8 }} key={`choice-${i}`}>
+                <label style={{ display: 'flex' }}>
+                  <input
+                    name="warnings"
+                    type="checkbox"
+                    checked={isWarningChecked[i]}
+                    style={{ display: 'inline-block', marginRight: 8 }}
+                    onChange={() => { toggleWarning(i) }} />
+                  <span style={{ flexGrow: 1 }}>{x}</span>
+                </label>
+              </div>
+            ))}
+            <Button onClick={generateCode} style={{ marginTop: 16, width: '100%' }}>
+              สร้างโค้ด
+            </Button>
+            {/* </Well> */}
           </>
         }
 
         {displayMode === 'result' &&
           <>
+            <h2>โค้ดของคุณคือ</h2>
             <Well>
-              <h2>โค้ดของคุณคือ</h2>
-            <a href={codeUrl} target="_blank">{codeUrl}</a>
+              <a href={codeUrl} target="_blank">{codeUrl}</a>
             </Well>
-            <Button onClick={() => setDisplayMode('select')}>ย้อนกลับ</Button>
+            <Button onClick={() => setDisplayMode('select')} style={{ marginTop: 16, width: '100%' }}>ย้อนกลับ</Button>
           </>
         }
       </Col>

@@ -8,7 +8,8 @@ function Home() {
     <Row>
       <Col>
         <Well style={{textAlign: 'center', marginTop: 32, marginBottom: 32, paddingBottom: 32}}>
-        <h1>ติด Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
+          <h1 style={{marginBottom: 0}}>ติด Trigger Warning แบบให้สปอยล์น้อยที่สุด!</h1>
+          <div style={{ marginBottom: 32 }}>BETA: ทดสอบระบบ</div>
         <Button as={Link} to="/generate">สร้างโค้ดตรวจสอบ Trigger Warning</Button>
         </Well>
       </Col>

@@ -33,7 +33,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/check">
+          <Route path="/check/v1">
             <Check />
           </Route>
           <Route path="/generate">
